@@ -1,3 +1,16 @@
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyD5KmMIQPGWbYaKGi9DHnFfz5mU1rfK6Lg",
+    authDomain: "photowall-8a567.firebaseapp.com",
+    databaseURL: "https://photowall-8a567.firebaseio.com",
+    projectId: "photowall-8a567",
+    storageBucket: "photowall-8a567.appspot.com",
+    messagingSenderId: "697910424434"
+  };
+  firebase.initializeApp(config);
+
+
+
 // BUDGET CONTROLLER 
 
 const budgetController = (function() {
@@ -61,12 +74,15 @@ const budgetController = (function() {
             // create new item based on 'exp' or 'inc' type 
             if (type === 'exp') {
                 newItem = new Expense(ID, desc, val)
+                
             } else if (type === 'inc') {
                 newItem = new Income(ID, desc, val)
+                console.log(newItem)
             }
-
+            
             // push the new item in the array 
             data.allItems[type].push(newItem)
+            console.log(data)
                 // return the item 
             return newItem
 
@@ -124,7 +140,6 @@ const budgetController = (function() {
             console.log(data)
         }
     }
-
 })()
 
 
@@ -206,7 +221,6 @@ const UIcontroller = (function() {
             newHTML = HTML.replace('%id%', obj.id)
             newHTML = newHTML.replace('%description%', obj.description)
             newHTML = newHTML.replace('%value%', formatNumber(obj.value, type))
-
             document.querySelector(element).insertAdjacentHTML('beforeend', newHTML)
         },
         deleteListItem: function(selectorId) {
